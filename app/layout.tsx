@@ -4,6 +4,7 @@ import "./globals.css";
 import { ThemeProvider } from "@/components/theme-provider"
 import { cn } from "@/lib/utils";
 import Header from "@/components/Header";
+import { ClerkProvider, Show, SignInButton, SignUpButton, UserButton } from '@clerk/nextjs'
 
 const lora = Lora({
 
@@ -38,6 +39,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
+    <ClerkProvider>
     <html lang="en" suppressHydrationWarning>
       <head />
       <body className={`${lora.variable} ${dmSans.variable}`}>
@@ -52,5 +54,6 @@ export default function RootLayout({
         </ThemeProvider>
       </body>
     </html>
+     </ClerkProvider>
   );
 }
