@@ -1,4 +1,4 @@
-# Forge AI
+# Forge AI (work in progress)
 
 Forge AI is an AI-powered full-stack application builder inspired by Loveable. Describe the application you want to build in natural language, and Forge AI generates a complete project with a live preview, editable source code, automatic dependency management, and AI-assisted debugging.
 
