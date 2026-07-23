@@ -8,7 +8,7 @@ import { Button } from "@/components/ui/button";
 function Header() {
   return (
     <header className="fixed top-0 left-0 z-50 h-16 w-full border-white/6 bg-white/7 shadow-md backdrop-blur-md">
-      <nav className="mx-auto flex h-full max-w-7xl items-center justify-between px-4 sm:px-6 lg:px-8">
+      <nav className="flex h-full w-full items-center justify-between">
         <Link href="/">
           <Image
             src="/logo.png"
@@ -18,7 +18,6 @@ function Header() {
             className="h-9 w-auto rounded-md"
           />
         </Link>
-
         <div className="flex items-center gap-5">
           <Show when="signed-in">
             <Link
