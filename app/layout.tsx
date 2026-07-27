@@ -5,6 +5,12 @@ import { ThemeProvider } from "@/components/theme-provider"
 import { cn } from "@/lib/utils";
 import Header from "@/components/Header";
 import { ClerkProvider, Show, SignInButton, SignUpButton, UserButton } from '@clerk/nextjs'
+import { Fira_Code } from "next/font/google";
+
+export const firaCode = Fira_Code({
+  subsets: ["latin"],
+  variable: "--font-fira",
+});
 
 const lora = Lora({
 
@@ -40,7 +46,7 @@ export default function RootLayout({
 }>) {
   return (
     <ClerkProvider>
-    <html lang="en" suppressHydrationWarning>
+    <html lang="en" suppressHydrationWarning className={firaCode.variable}>
       <head />
       <body className={`${lora.variable} ${dmSans.variable}`}>
         <ThemeProvider
