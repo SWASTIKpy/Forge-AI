@@ -14,3 +14,4 @@ export const SUGGESTIONS = [
   "A recipe finder with filters",
   "A pomodoro timer with tasks",
 ];
+
