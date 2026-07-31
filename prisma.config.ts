@@ -3,12 +3,15 @@
 import "dotenv/config";
 import { defineConfig } from "prisma/config";
 
+const directUrl = new URL(process.env["DIRECT_URL"]!);
+directUrl.searchParams.set("sslmode", "require");
+
 export default defineConfig({
   schema: "prisma/schema.prisma",
   migrations: {
     path: "prisma/migrations",
   },
   datasource: {
-    url: process.env["DIRECT_URL"],
+    url: directUrl.toString(),
   },
 });
