@@ -53,7 +53,7 @@ function Header() {
                 Get Started
                 <ArrowRight className="h-3 w-3 opacity-60" />
               </Button>
-            </SignInButton>
+            </SignInButton> 
           </Show>
         </div>
       </nav>
