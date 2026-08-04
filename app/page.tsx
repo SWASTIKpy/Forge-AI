@@ -7,7 +7,7 @@ import { HoleBackground } from "@/components/animate-ui/components/backgrounds/h
 import { BlueTitle, GrayTitle } from "@/components/reusables";
 import {cn} from "@/lib/utils";
 import { useRef, useState } from "react";
-import { useRouter } from "next/dist/client/components/navigation";
+import { useRouter } from "next/navigation";
 import { SignInButton, useAuth } from "@clerk/nextjs";
 import { PLACEHOLDERS, SUGGESTIONS } from "@/lib/data";
 import { useEffect } from "react";
