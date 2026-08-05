@@ -15,8 +15,6 @@ The goal is to make building applications feel like collaborating with an AI sof
 - 📦 Automatic framework and dependency installation
 - 🔒 Secure sandboxed execution environment
 - 🐞 AI-powered runtime error analysis and automatic fixes
-- 🕒 Version history for every generation and bug fix
-- ♻️ Restore or compare previous generations
 - 📥 Export projects as ZIP files for local development
 
 ---
