@@ -1,6 +1,6 @@
 # ⚒️ Forge AI
 
-Forge AI is an AI-powered full-stack application builder inspired by Loveable. Simply describe the application you want to build in natural language, and Forge AI generates a complete project with a live preview, editable source code, automatic dependency management, AI-assisted debugging, and version history.
+Forge AI is an AI-powered full-stack application builder inspired by Loveable. Describe the application you want to build in natural language, and Forge AI generates a complete project with a live preview, editable source code, automatic dependency management, AI-assisted debugging, and version history.
 
 The goal is to make building applications feel like collaborating with an AI software engineer while still giving developers full control over the generated code.
 
@@ -13,8 +13,9 @@ The goal is to make building applications feel like collaborating with an AI sof
 - 📁 Built-in file explorer
 - 💻 Integrated code editor
 - 📦 Automatic framework and dependency installation
-- 🔒 Secure sandboxed execution environment
-- 🐞 AI-powered runtime error analysis and automatic fixes
+- 🔒 Secure sandboxed execution using Sandpack
+- 🐞 AI-powered runtime error detection and automatic bug fixing
+- 📜 Version history for AI generations and fixes
 - 📥 Export projects as ZIP files for local development
 
 ---
@@ -31,15 +32,16 @@ The goal is to make building applications feel like collaborating with an AI sof
 
 ### Backend
 
-- Next.js API Routes
-- Supabase (Database)
+- Next.js Route Handlers
+- Supabase
 - Clerk Authentication
 
 ### AI & Infrastructure
 
-- Gemini API
+- Google Gemini API
 - Cline
-- Sandboxed execution environment using sandpack
+- Sandpack
+- Arcjet
 
 ---
 
@@ -48,23 +50,27 @@ The goal is to make building applications feel like collaborating with an AI sof
 1. Describe the application you want to build.
 2. Forge AI plans the project structure.
 3. Required dependencies are installed automatically.
-4. The application is generated and launched inside a secure sandbox.
+4. The application is generated and executed inside a secure sandbox.
 5. Runtime errors are detected and analyzed.
-6. AI attempts to automatically fix errors using project context.
-7. Every generation is stored so you can restore previous versions at any time.
-8. Export your finished project as a ZIP and continue development locally.
+6. AI attempts to automatically fix issues using project context.
+7. Every generation is stored, allowing previous versions to be restored.
+8. Export the finished project as a ZIP and continue development locally.
 
 ---
 
 ## 📸 Preview
 
-> Add screenshots or GIFs here.
+| Landing Page |
+|--------------|-----------|
+| ![](assets/1.png) | ![](assets/2.png) |
 
-- Landing Page
-- Workspace
-- AI Generation
-- Code Editor
-- Live Preview
+| Workspace | Code Editor |
+|---------------|-------------|
+| ![](assets/3.png) | ![](assets/4.png) |
+
+| Live Preview |
+|---------------|
+| ![](assets/5.png) |
 
 ---
 
@@ -74,6 +80,7 @@ Clone the repository
 
 ```bash
 git clone https://github.com/yourusername/forge-ai.git
+
 cd forge-ai
 ```
 
@@ -122,47 +129,60 @@ GEMINI_API_KEY=
 
 ## 🗺️ Roadmap
 
-### Completed ✅
+### ✅ Completed
 
 - Responsive frontend
 - Authentication with Clerk
-- Backend using Next.js API Routes
+- Backend using Next.js Route Handlers
 - AI generation workflow
 - Built-in code editor
 - File explorer
-- Sandboxed execution
+- Secure sandbox execution
 - Live preview
 - Version history
-- export to zip
+- Export projects as ZIP
 
-### Planned 🚧
+### 🚧 Planned
 
 - Fuzzy search
-- Bring Your Own AI API Key (OpenAI, Anthropic, Gemini, etc.)
+- Bring Your Own AI API Key (Gemini, OpenAI, Anthropic, etc.)
+- Multi-model support
+- GitHub repository export
 
 ---
 
 ## 📚 What I Learned
 
-This project was my first experience building a **full-stack application with Next.js** used alot of frameworks as i wanted to check how would abstraction make me overthink lol .
+Forge AI was my first project using **Next.js as a full-stack framework**, giving me hands-on experience building both the frontend and backend in a single application.
 
-Some of the technologies and concepts I explored include:
+Through this project, I explored:
 
-- Building backend APIs using Next.js Route Handlers
-- Authentication with Clerk
+- Building backend APIs with Next.js Route Handlers
+- Authentication using Clerk
 - Database integration with Supabase
-- Working with shadcn/ui for reusable component
-- Handling runtime error analysis and automated fixing
-- Managing project versions and state across AI generations
-- streaming ai responses 
+- Creating reusable UI with shadcn/ui
+- AI integration with the Gemini API
+- Streaming AI responses for a better user experience
+- Runtime error detection and AI-assisted debugging
+- Managing application state and version history
+- Working with a sandboxed execution environment using Sandpack
 
-This project significantly improved my understanding of how modern AI-powered developer tools are built.
+This project significantly improved my understanding of how modern AI-powered developer tools are designed and built.
+
+---
+
+## ⚠️ Current Limitations
+
+- Uses the free Gemini API tier
+- Large prompts may exceed API limits
+- Complex projects may require multiple generations
+- Bring Your Own API Key support is planned
 
 ---
 
 ## 🤝 Contributing
 
-Contributions, suggestions, and feature requests are welcome.
+Contributions, feature requests, and suggestions are always welcome.
 
 Feel free to open an issue or submit a pull request.
 
@@ -170,4 +190,4 @@ Feel free to open an issue or submit a pull request.
 
 ## 📄 License
 
-Licensed under the MIT License.
+This project is licensed under the MIT License.
