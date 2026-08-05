@@ -53,17 +53,39 @@ npm install
 npm run dev
 ```
 
+## ENV var setup 
+NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY= ....
+CLERK_SECRET_KEY=....
+ARCJET_KEY = ...
+NEXT_PUBLIC_CLERK_SIGN_IN_URL=/sign-in
+NEXT_PUBLIC_CLERK_SIGN_UP_URL=/sign-up
+# Connect to Postgres via the shared transaction-mode pooler (IPv4-only)
+DATABASE_URL= "...."
+
+# Connect to Postgres via the shared session-mode pooler (used for migrations)
+DIRECT_URL="...."
+
+NEXT_PUBLIC_SUPABASE_ANON_KEY = ......
+NEXT_PUBLIC_SUPABASE_URL = https://.....
+
+# Google Gemini
+GEMINI_API_KEY= AQ.....
+
+
 ---
 
 ## Roadmap
 
--Frontend
--authentication
--backend
+-Frontend ✅
+-authentication✅
+-backend✅
 -feature addons:
--in built editor
-- file explorer
-- sandboxing
+-in built editor✅
+- file explorer✅
+- sandboxing✅
+- fuzzy search
+- adding your own ai api
+- 
 ---
 
 ## License
