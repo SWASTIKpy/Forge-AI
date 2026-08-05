@@ -6,7 +6,7 @@ import type { Plan } from "@/types/plans";
 const getCurrentPlan = async (): Promise<Plan> => {
   const { has } = await auth();
   if (has({ plan: "pro" })) return "pro";
-  if (has({ plan: "starter" })) return "starter";
+  if (has({ plan: "basic" })) return "basic";
   return "free";
 };
 

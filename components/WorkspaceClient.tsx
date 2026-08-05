@@ -44,6 +44,27 @@ function parseFileData(raw: unknown): FileData | null {
   return raw as FileData;
 }
 
+async function getResponseError(
+  response: Response,
+  fallback: string
+): Promise<string> {
+  try {
+    const body: unknown = await response.json();
+    if (
+      typeof body === "object" &&
+      body !== null &&
+      "message" in body &&
+      typeof body.message === "string"
+    ) {
+      return body.message;
+    }
+  } catch {
+    // Use the fallback when the endpoint did not return JSON.
+  }
+
+  return fallback;
+}
+
 export function WorkspaceClient({
   initialPrompt,
   workspace,
@@ -150,7 +171,9 @@ export function WorkspaceClient({
           setMessages((prev) => prev.slice(0, -1));
           return;
         }
-        if (!res.ok || !res.body) throw new Error("Generation failed");
+        if (!res.ok || !res.body) {
+          throw new Error(await getResponseError(res, "Generation failed"));
+        }
 
         const reader = res.body.getReader();
         const decoder = new TextDecoder();
@@ -166,29 +189,39 @@ export function WorkspaceClient({
 
           for (const line of lines) {
             if (!line.startsWith("data: ")) continue;
+            let event: {
+              type?: string;
+              message?: string;
+              [key: string]: unknown;
+            };
             try {
-              const event = JSON.parse(line.slice(6));
-              if (event.type === "status") {
-                pushStep(event.message);
-              } else if (event.type === "done") {
-                completeSteps();
-                setWorkspaceId(event.workspaceId);
-                setFileData(event.fileData);
-                setCredits(event.creditsRemaining);
-                setMessages((prev) => [
-                  ...prev,
-                  { role: "assistant", content: event.assistantMessage },
-                ]);
-                window.history.replaceState(
-                  null,
-                  "",
-                  `/workspace?id=${event.workspaceId}`
-                );
-              } else if (event.type === "error") {
-                throw new Error(event.message);
-              }
+              event = JSON.parse(line.slice(6));
             } catch {
               // skip malformed SSE lines
+              continue;
+            }
+
+            if (event.type === "status" && typeof event.message === "string") {
+              pushStep(event.message);
+            } else if (event.type === "done") {
+              completeSteps();
+              setWorkspaceId(event.workspaceId as string);
+              setFileData(event.fileData as FileData);
+              setCredits(event.creditsRemaining as number);
+              setMessages((prev) => [
+                ...prev,
+                {
+                  role: "assistant",
+                  content: event.assistantMessage as string,
+                },
+              ]);
+              window.history.replaceState(
+                null,
+                "",
+                `/workspace?id=${event.workspaceId}`
+              );
+            } else if (event.type === "error") {
+              throw new Error(event.message ?? "Generation failed");
             }
           }
         }
@@ -261,7 +294,9 @@ export function WorkspaceClient({
           setMessages((prev) => prev.slice(0, -2));
           return;
         }
-        if (!res.ok || !res.body) throw new Error("Improve failed");
+        if (!res.ok || !res.body) {
+          throw new Error(await getResponseError(res, "Improve failed"));
+        }
 
         const reader = res.body.getReader();
         const decoder = new TextDecoder();
@@ -283,41 +318,49 @@ export function WorkspaceClient({
 
           for (const line of lines) {
             if (!line.startsWith("data: ")) continue;
+            let event: {
+              type?: string;
+              message?: string;
+              [key: string]: unknown;
+            };
             try {
-              const event = JSON.parse(line.slice(6));
-
-              if (event.type === "thinking") {
-                // Stream agent reasoning into the placeholder assistant message
-                accumulatedThinking += event.text;
-                setMessages((prev) => {
-                  const updated = [...prev];
-                  updated[updated.length - 1] = {
-                    role: "assistant",
-                    content: accumulatedThinking,
-                  };
-                  return updated;
-                });
-              } else if (event.type === "file_patch") {
-                // Accumulate locally — don't touch state yet
-                localPatches[event.path] = { code: event.code };
-              } else if (event.type === "done") {
-                // Apply all patches at once now that the stream is complete
-                setFileData(event.fileData);
-                setCredits(event.creditsRemaining);
-                // Replace thinking text with clean summary
-                setMessages((prev) => {
-                  const updated = [...prev];
-                  updated[updated.length - 1] = {
-                    role: "assistant",
-                    content: event.summary,
-                  };
-                  return updated;
-                });
-              } else if (event.type === "error") {
-                throw new Error(event.message);
-              }
+              event = JSON.parse(line.slice(6));
             } catch {
               // skip malformed SSE lines
+              continue;
+            }
+
+            if (event.type === "thinking") {
+              // Stream agent reasoning into the placeholder assistant message
+              accumulatedThinking += event.text as string;
+              setMessages((prev) => {
+                const updated = [...prev];
+                updated[updated.length - 1] = {
+                  role: "assistant",
+                  content: accumulatedThinking,
+                };
+                return updated;
+              });
+            } else if (event.type === "file_patch") {
+              // Accumulate locally — don't touch state yet
+              localPatches[event.path as string] = {
+                code: event.code as string,
+              };
+            } else if (event.type === "done") {
+              // Apply all patches at once now that the stream is complete
+              setFileData(event.fileData as FileData);
+              setCredits(event.creditsRemaining as number);
+              // Replace thinking text with clean summary
+              setMessages((prev) => {
+                const updated = [...prev];
+                updated[updated.length - 1] = {
+                  role: "assistant",
+                  content: event.summary as string,
+                };
+                return updated;
+              });
+            } else if (event.type === "error") {
+              throw new Error(event.message ?? "Improve failed");
             }
           }
         }

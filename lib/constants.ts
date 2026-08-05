@@ -4,7 +4,7 @@ export const PLANS = {
     credits: 7,
     price: 0,
   },
-  starter: {
+  basic: {
     label: "Basic",
     credits: 35,
     price: 7,
@@ -32,12 +32,12 @@ export const PRICING_PLANS = [
     features: ["10 generations / month", "Live preview", "Export to zip"],
   },
   {
-    key: "starter",
-    label: "Starter",
+    key: "basic",
+    label: "Basic",
     description: "For users who want to support us.",
-    price: 9,
+    price: 7,
     featured: true,
-    planId: "cplan_3DvxGsOeYA5bpJzGWPi8o7wScRD",
+    planId: "cplan_3H7lxgO5g19td3TgqS81CuvXeiB",
     active: false,
     features: [
       "50 generations / month",
@@ -52,7 +52,7 @@ export const PRICING_PLANS = [
     description: "For Slop builders and Vibe coders.",
     price: 69,
     featured: false,
-    planId: "cplan_3DvxTfywwB0NyQ1iqANclgNqlq8",
+    planId: "cplan_3H7mQ4zjn1eQeiNQailWQM4jfb8",
     active: false,
     features: [
       "150 generations / month",

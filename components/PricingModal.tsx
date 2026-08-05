@@ -36,15 +36,15 @@ export function PricingModal({
 
   const planOrder: Record<string, number> = {
     free: 0,
-    starter: 1,
+    basic: 1,
     pro: 2,
   };
 
   const activePlanKey = isSignedIn
     ? has?.({ plan: "pro" })
       ? "pro"
-      : has?.({ plan: "starter" })
-      ? "starter"
+      : has?.({ plan: "basic" })
+      ? "basic"
       : "free"
     : null;
 
