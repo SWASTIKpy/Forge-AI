@@ -39,7 +39,7 @@ The goal is to make building applications feel like collaborating with an AI sof
 
 - Gemini API
 - Cline
-- Sandboxed execution environment
+- Sandboxed execution environment using sandpack
 
 ---
 
