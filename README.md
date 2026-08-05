@@ -166,9 +166,6 @@ Through this project, I explored:
 - Runtime error detection and AI-assisted debugging
 - Managing application state and version history
 - Working with a sandboxed execution environment using Sandpack
-
-This project significantly improved my understanding of how modern AI-powered developer tools are designed and built.
-
 ---
 
 ## ⚠️ Current Limitations
@@ -176,7 +173,7 @@ This project significantly improved my understanding of how modern AI-powered de
 - Uses the free Gemini API tier
 - Large prompts may exceed API limits
 - Complex projects may require multiple generations
-- Bring Your Own API Key support is planned
+- Bring Your Own API Key support will implement soon 
 
 ---
 
