@@ -263,6 +263,12 @@ export default function Home() {
           </div>
         </div>
       </section>
+
+      <footer className="w-full pb-8 pt-4 text-center">
+        <p className="text-sm text-white/40">
+          Made with ❤️ by Swastik
+        </p>
+      </footer>
     </main>
   );
 }
